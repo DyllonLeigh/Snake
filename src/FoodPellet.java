@@ -11,7 +11,6 @@ public class FoodPellet extends GameObject {
         
         super(x, y, id, beenEaten);
         this.handler = handler;
-        System.out.println(x + ", " + y);
     }
 
     @Override

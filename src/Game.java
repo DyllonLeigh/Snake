@@ -4,18 +4,18 @@ import java.util.Random;
 
 public class Game extends Canvas implements Runnable {
 
-    public static final int maxResX = 640, maxResY = 480, snakeSize = 20, foodSize = 10;
+    public static final int maxResX = 640, maxResY = 480, snakeSize = 20, foodSize = 12;
 
     private Random r = new Random();
     private Handler handler = new Handler();
 
     private String gameName = "Snake";
 
-    // start Player in the centre of the screen:
+// start Player in the centre of the screen:
     private int playerPosX = (maxResX / 2) - snakeSize;
     private int playerPosY = (maxResY / 2) - snakeSize;
 
-    // Randomly Generate the Food Pellets initial position:
+// Randomly Generate the Food Pellets initial position:
     private int foodPosX = r.nextInt(maxResX - foodSize);
     private int foodPosY = r.nextInt(maxResY - foodSize);
 
@@ -27,13 +27,13 @@ public class Game extends Canvas implements Runnable {
     }
 
     public Game() {
-
+// Listen for Key Presses:
         this.addKeyListener(new KeyInput(handler));
-
+// Set Properties for new Window:
         new Window(maxResX + 5, maxResY + 29, gameName, this);
-
+// Create the Player:
         handler.addObject(new Player(playerPosX, playerPosY, 1, ID.Player, false, handler));
-
+// Create the Food Pellet:
         handler.addObject(new FoodPellet(foodPosX, foodPosY, ID.FoodPellet, false, handler));
 
     }

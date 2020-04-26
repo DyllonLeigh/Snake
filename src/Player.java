@@ -15,7 +15,7 @@ public class Player extends GameObject {
 
     @Override
     public void tick() {
-
+// Keeping X and Y within the bounds of the Window:
         if (x < 0) {
             x = (Game.maxResX - Game.snakeSize);
         } else if (x > (Game.maxResX - Game.snakeSize)) {
@@ -27,6 +27,7 @@ public class Player extends GameObject {
             y = 0;
         }
 
+// Check for Collisions:
         for (int i = 0; i < handler.object.size(); i++) {
             GameObject tempObject = handler.object.get(i);
 
@@ -34,21 +35,21 @@ public class Player extends GameObject {
                 if (getBounds().intersects(tempObject.getBounds())) {
                     snakeLength++;
 
-                    // Randomising Pellets next location.
                     int a = r.nextInt(Game.maxResX - Game.foodSize);
                     int b = r.nextInt(Game.maxResY - Game.foodSize);
 
-                    // Create a new Food Pellet.
                     handler.removeObject(tempObject);
                     handler.addObject(new FoodPellet(a, b, ID.FoodPellet, false, handler));
                 }
             }
         }
+//
+
+        handler.addObject(new Tail(x, y, snakeLength, ID.Tail, false, handler));
 
         x += velX;
         y += velY;
 
-        handler.addObject(new Tail(x, y, snakeLength, ID.Tail, false, handler));
     }
 
     @Override

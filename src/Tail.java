@@ -19,8 +19,8 @@ public class Tail extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        g.fillRect(x, y, Game.snakeSize, Game.snakeSize);
         g.setColor(Color.green);
+        g.fillRect(x, y, Game.snakeSize, Game.snakeSize);
     }
 
     @Override

@@ -19,17 +19,22 @@ public class KeyInput extends KeyAdapter {
 
             if (tempObject.getId() == ID.Player) {
                 // key events for player
-                if((key == KeyEvent.VK_W)
-                || (key == KeyEvent.VK_S)
-                || (key == KeyEvent.VK_D)
-                || (key == KeyEvent.VK_A)) {
-                    tempObject.setVelY(0);
+                if((key == KeyEvent.VK_W) && !(tempObject.getVelY() > 0)) {
+                    tempObject.setVelY(-20);
                     tempObject.setVelX(0);
                 }
-                if (key == KeyEvent.VK_W) tempObject.setVelY(-20);
-                if (key == KeyEvent.VK_S) tempObject.setVelY(20);
-                if (key == KeyEvent.VK_D) tempObject.setVelX(20);
-                if (key == KeyEvent.VK_A) tempObject.setVelX(-20);
+                if((key == KeyEvent.VK_S) && !(tempObject.getVelY() < 0)) {
+                    tempObject.setVelY(20);
+                    tempObject.setVelX(0);
+                }
+                if((key == KeyEvent.VK_D) && !(tempObject.getVelX() < 0)) {
+                    tempObject.setVelY(0);
+                    tempObject.setVelX(20);
+                }
+                if((key == KeyEvent.VK_A) && !(tempObject.getVelX() > 0)) {
+                    tempObject.setVelY(0);
+                    tempObject.setVelX(-20);
+                }
             }
         }
     }
