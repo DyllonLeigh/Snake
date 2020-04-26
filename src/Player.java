@@ -3,12 +3,12 @@ import java.util.Random;
 
 public class Player extends GameObject {
 
-    private Handler handler;
     private Random r = new Random();
     private int snakeLength;
+    private Handler handler;
 
-    public Player(int x, int y, int snakeLength, ID id, boolean arg, Handler handler){
-        super(x, y, id, arg);
+    public Player(int x, int y, ID id, boolean alive, int snakeLength, Handler handler){
+        super(x, y, id, alive);
         this.snakeLength = snakeLength;
         this.handler = handler;
     }
@@ -39,13 +39,18 @@ public class Player extends GameObject {
                     int b = r.nextInt(Game.maxResY - Game.foodSize);
 
                     handler.removeObject(tempObject);
-                    handler.addObject(new FoodPellet(a, b, ID.FoodPellet, false, handler));
+                    handler.addObject(new FoodPellet(a, b, ID.FoodPellet, true));
                 }
             }
-        }
-//
+            if (tempObject.id == ID.Tail) {
+                if (getBounds().intersects(tempObject.getBounds())) {
+                    this.alive = false;
+                }
+            }
 
-        handler.addObject(new Tail(x, y, snakeLength, ID.Tail, false, handler));
+        }
+// The Star of the Show!!!
+        handler.addObject(new Tail(x, y, ID.Tail, true, snakeLength, handler));
 
         x += velX;
         y += velY;

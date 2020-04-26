@@ -3,27 +3,21 @@ import java.awt.*;
 public abstract class GameObject {
     protected int x, y;
     protected ID id;
+    protected boolean alive;
     protected int velX, velY;
-    protected  boolean beenEaten;
 
-    public GameObject(int x, int y, ID id, boolean arg) {
+    public GameObject(int x, int y, ID id, boolean alive) {
         this.x = x;
         this.y = y;
         this.id = id;
-        this.beenEaten = arg;
+        this.alive = alive;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
+    public abstract void tick();
 
-    public void setY(int y) {
-        this.y = y;
-    }
+    public abstract void render(Graphics g);
 
-    public void setId(ID id) {
-        this.id = id;
-    }
+    public abstract Rectangle getBounds();
 
     public void setVelX(int velX) {
         this.velX = velX;
@@ -31,14 +25,6 @@ public abstract class GameObject {
 
     public void setVelY(int velY) {
         this.velY = velY;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public ID getId() {
@@ -53,13 +39,23 @@ public abstract class GameObject {
         return velY;
     }
 
-    public boolean hasBeenEaten() {
-        return beenEaten;
+/*    public void setX(int x) {
+        this.x = x;
     }
 
-    public abstract void tick();
+    public void setY(int y) {
+        this.y = y;
+    }
 
-    public abstract void render(Graphics g);
+    public void setId(ID id) {
+        this.id = id;
+    }
 
-    public abstract Rectangle getBounds();
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }*/
 }

@@ -2,11 +2,11 @@ import java.awt.*;
 import java.util.Random;
 
 public class Tail extends GameObject {
-    private Handler handler;
     private int snakeLength;
+    private Handler handler;
 
-    public Tail(int x, int y, int snakeLength, ID id, boolean arg, Handler handler ) {
-        super(x, y, id, arg);
+    public Tail(int x, int y, ID id, boolean alive, int snakeLength, Handler handler ) {
+        super(x, y, id, alive);
         this.snakeLength = snakeLength;
         this.handler = handler;
     }

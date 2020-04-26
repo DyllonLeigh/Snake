@@ -3,14 +3,8 @@ import java.util.Random;
 
 public class FoodPellet extends GameObject {
 
-    private Handler handler;
-    private boolean beenEaten = false;
-    private Random r = new Random();
-
-    public FoodPellet(int x, int y, ID id, boolean beenEaten, Handler handler) {
-        
-        super(x, y, id, beenEaten);
-        this.handler = handler;
+    public FoodPellet(int x, int y, ID id, boolean alive) {
+        super(x, y, id, alive);
     }
 
     @Override

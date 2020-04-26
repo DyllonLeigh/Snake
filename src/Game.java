@@ -32,46 +32,39 @@ public class Game extends Canvas implements Runnable {
 // Set Properties for new Window:
         new Window(maxResX + 5, maxResY + 29, gameName, this);
 // Create the Player:
-        handler.addObject(new Player(playerPosX, playerPosY, 1, ID.Player, false, handler));
+        handler.addObject(new Player(playerPosX, playerPosY, ID.Player, true, 1, handler));
+// Create the HUD:
+        handler.addObject(new HUD(2,2,ID.HUD,true));
 // Create the Food Pellet:
-        handler.addObject(new FoodPellet(foodPosX, foodPosY, ID.FoodPellet, false, handler));
-
+        handler.addObject(new FoodPellet(foodPosX, foodPosY, ID.FoodPellet, true));
     }
 
+// Runs the game continuously... tick()ing and render()ing at regular intervals
     public void run(){
         this.requestFocus();
         long lastTime = System.nanoTime();
-        double speed = 10;                           // The number of times per second your actions are processed
+        double speed = 10;
         double ns = 1000000000 / speed;
         double speedSync = 0;
 
         while(running){
             long now = System.nanoTime();
-            speedSync += (now - lastTime) / ns;         // Amount of Times to loop before Rendering
+            speedSync += (now - lastTime) / ns;
             lastTime = now;
-            while (speedSync >= 1){                     // This loop regulates the game speed
+            while (speedSync >= 1) {
                 tick();
                 speedSync--;
             }
             render();
+            running = handler.object.get(0).alive;
         }
-        stop();
+        System.exit(1);
     }
 
     public synchronized void start(){
         thread = new Thread(this);
         thread.start();
         running = true;
-    }
-
-    public synchronized void stop(){
-        try {
-            thread.join();
-            running = false;
-            System.exit(1);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void tick(){
@@ -84,7 +77,6 @@ public class Game extends Canvas implements Runnable {
             this.createBufferStrategy(3);
             return;
         }
-
         Graphics g = bs.getDrawGraphics();
 
         g.setColor(Color.black);
@@ -94,6 +86,5 @@ public class Game extends Canvas implements Runnable {
 
         g.dispose();
         bs.show();
-
     }
 }
