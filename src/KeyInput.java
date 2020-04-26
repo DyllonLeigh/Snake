@@ -20,20 +20,20 @@ public class KeyInput extends KeyAdapter {
             if (tempObject.getId() == ID.Player) {
                 // key events for player
                 if((key == KeyEvent.VK_W) && !(tempObject.getVelY() > 0)) {
-                    tempObject.setVelY(-20);
+                    tempObject.setVelY( - Game.snakeSize);
                     tempObject.setVelX(0);
                 }
                 if((key == KeyEvent.VK_S) && !(tempObject.getVelY() < 0)) {
-                    tempObject.setVelY(20);
+                    tempObject.setVelY(Game.snakeSize);
                     tempObject.setVelX(0);
                 }
                 if((key == KeyEvent.VK_D) && !(tempObject.getVelX() < 0)) {
                     tempObject.setVelY(0);
-                    tempObject.setVelX(20);
+                    tempObject.setVelX(Game.snakeSize);
                 }
                 if((key == KeyEvent.VK_A) && !(tempObject.getVelX() > 0)) {
                     tempObject.setVelY(0);
-                    tempObject.setVelX(-20);
+                    tempObject.setVelX( - Game.snakeSize);
                 }
             }
         }
